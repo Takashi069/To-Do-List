@@ -1,0 +1,26 @@
+*{
+ margin: 0px;
+}
+
+#TaskList{
+    background-color: grey;
+    height:100%;
+    width:100%;
+}
+#Task{
+    position:relative;
+    display: grid;
+    z-index:0;
+    margin: 2%;
+    margin-top: 3%;
+    padding:2.5rem;
+    background-color: antiquewhite;
+    border-radius: 25px;
+    border-style:inset;
+}
+#Complete{
+    background-color: rgb(11, 114, 11);
+}
+#Delete{
+    background-color: rgb(194, 52, 52);
+}
