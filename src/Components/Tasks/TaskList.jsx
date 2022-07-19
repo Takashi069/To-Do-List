@@ -10,7 +10,7 @@ import './Tasks.css'
 
 //De-referenceing props have to be in {} and not in ()
 const TaskList = ({tasks,handleDelete}) => {
-
+    
     return ( 
         <div id="TaskList">
             {tasks.map((task) => (
