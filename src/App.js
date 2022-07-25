@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import NavBar from './Components/NavBar/NavBar.jsx';
 import TaskList from './Components/Tasks/TaskList';
@@ -8,12 +8,31 @@ function App() {
   let newtaskMessage;
   let newtaskID = 3;
 
-  const [tasks,setTasks] = useState([
-    {taskID: 1, taskMessage: "Mess 1", dueDate: "01/01/2022"},
-    {taskID: 2, taskMessage: "Mess 2", dueDate: "05/06/2022"},
-    {taskID: 3, taskMessage: "Mess 3", dueDate: "10/05/2022"}
-  ])
+  useEffect(()=>{
+    fetch("http://localhost:8000/tasks")
+      .then(res =>{
+        if(res.ok === false){
+          // Error handling
+          throw Error("Could not fetch resource from database")
+        }
+        return res.json()
+      })
+      .then(data =>{
+        //This data is the parsed data after getting a response from the link
+        setTasks(data)
+        setdataRetrieved(true)
+        setErrorDetected(false);
+      })
+      .catch(error =>{
+        console.log(error)
+        setErrorDetected(true)
+        setdataRetrieved(false);
+      })
+  },[])
 
+  const [tasks,setTasks] = useState(null)
+  const [dataRetrived,setdataRetrieved] = useState(false);
+  const [errorDetected, setErrorDetected] = useState(false);
   
   const handleDelete = (id, category)=>{
     const newTasks = tasks.filter((task) => task.taskID!==id);
@@ -57,9 +76,14 @@ function App() {
       <NavBar handleClick={handleClickNavBarAddButton} />
       <h1 id="Title1">Today's Tasks</h1>
       {/* {console.log(Object.values(tasks))} */}
-      <TaskList tasks={tasks.filter((task) => task.dueDate === "01/01/2022")} handleDelete = {handleDelete}/>
+      {/*Conditional Templating shown below */}
+      {errorDetected && <div id="Error">Data Not Available</div>}
+      {!dataRetrived && !errorDetected && <div id="Loading">Loading</div>}
+      {tasks && <TaskList tasks={tasks.filter((task) => task.dueDate === "01/01/2022")} handleDelete = {handleDelete}/>}
       <h1>All Tasks</h1>
-      <TaskList tasks={tasks} handleDelete = {handleDelete}/>
+      {errorDetected && <div id="Error">Data Not Available</div>}
+      {!dataRetrived && !errorDetected && <div id="Loading">Loading</div>}
+      {tasks && <TaskList tasks={tasks} handleDelete = {handleDelete}/>}
 
     </div>
   );
@@ -69,10 +93,6 @@ export default App;
 
 
 /*
-  TODO: Make the handleClick of the NavBar
-  interact with adding new Tasks to the set of Tasks
-
-  Issue: After doing an setTasks for the handleClick
-  it resets the tasks to an empty array
-
-  */
+  Commands to get react to watch the JSON server
+  npx json-server --watch path-to-db --port 8000  --> since port 3000 is hosting the development server
+*/
