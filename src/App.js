@@ -1,48 +1,19 @@
-import { useState, useEffect } from 'react';
+import useFetch from './Hooks/useFetch'
 import './App.css';
+import Contact from './Components/Contact/Contact.jsx';
 import NavBar from './Components/NavBar/NavBar.jsx';
-import TaskList from './Components/Tasks/TaskList';
+import Dashboard from './Components/Dashboard/Dashboard.jsx';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
 function App() {
 
   let newtaskMessage;
   let newtaskID = 3;
 
-  useEffect(()=>{
-    fetch("http://localhost:8000/tasks")
-      .then(res =>{
-        if(res.ok === false){
-          // Error handling
-          throw Error("Could not fetch resource from database")
-        }
-        return res.json()
-      })
-      .then(data =>{
-        //This data is the parsed data after getting a response from the link
-        setTasks(data)
-        setdataRetrieved(true)
-        setErrorDetected(false);
-      })
-      .catch(error =>{
-        console.log(error)
-        setErrorDetected(true)
-        setdataRetrieved(false);
-      })
-  },[])
-
-  const [tasks,setTasks] = useState(null)
-  const [dataRetrived,setdataRetrieved] = useState(false);
-  const [errorDetected, setErrorDetected] = useState(false);
+  // const [tasks,setTasks] = useState(null)
+  const {data:tasks, setData:setTasks, errorDetected, dataRetrived } = useFetch("http://localhost:8000/tasks")
   
-  const handleDelete = (id, category)=>{
-    const newTasks = tasks.filter((task) => task.taskID!==id);
-    setTasks(newTasks)
-    if(category === false)
-      console.log("Deleting " + id)
-    else if (category === true)
-      console.log("Completed " + id);
-  }
-
+  
   const handleClickNavBarAddButton = () =>{
     newtaskID+=1;
     newtaskMessage = prompt("Enter the task: ");
@@ -73,18 +44,21 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar handleClick={handleClickNavBarAddButton} />
-      <h1 id="Title1">Today's Tasks</h1>
-      {/* {console.log(Object.values(tasks))} */}
-      {/*Conditional Templating shown below */}
-      {errorDetected && <div id="Error">Data Not Available</div>}
-      {!dataRetrived && !errorDetected && <div id="Loading">Loading</div>}
-      {tasks && <TaskList tasks={tasks.filter((task) => task.dueDate === "01/01/2022")} handleDelete = {handleDelete}/>}
-      <h1>All Tasks</h1>
-      {errorDetected && <div id="Error">Data Not Available</div>}
-      {!dataRetrived && !errorDetected && <div id="Loading">Loading</div>}
-      {tasks && <TaskList tasks={tasks} handleDelete = {handleDelete}/>}
-
+      <Router>
+        <NavBar handleClick={handleClickNavBarAddButton} />
+        <div className="content">
+          <Routes>{/* shows the different routes to be taken  */}
+                  {/* Route taken when a re-direction is issued/clicked in the webpage */}
+            <Route exact path="/" element={<Dashboard 
+                tasks={tasks} 
+                setTasks={setTasks} 
+                errorDetected={errorDetected} 
+                dataRetrived={dataRetrived} />
+            }/> {/*This is path to be shown when the brower loads the webpage */}
+            <Route exact path="/contact" element={<Contact />} />
+          </Routes>
+        </div>
+      </Router>
     </div>
   );
 }

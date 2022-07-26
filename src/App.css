@@ -8,22 +8,6 @@
   justify-content: first baseline;
   background-color: rgb(209, 181, 144);
 }
-
-#Title1{
-  margin-top: 10%;
-}
-#Loading{
-  font-size: larger;
-  font-weight: bold;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  justify-content: center;
-  padding: 2%;
-}
-#Error{
-  display: flex;
-  justify-content: center;
-  padding: 2%;
-  font-size: larger;
-  font-weight: bold;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+.content{
+  padding:5%;
 }
