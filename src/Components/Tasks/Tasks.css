@@ -23,3 +23,8 @@
 #Delete{
     background-color: rgb(194, 52, 52);
 }
+.Message{
+    align-self: center;
+    font-size: medium;
+    font-weight: bold;
+}

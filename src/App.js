@@ -9,7 +9,8 @@ function App() {
 
   let newtaskMessage;
   let newtaskID = 3;
-
+  let newDate
+  let today = new Date()
   // const [tasks,setTasks] = useState(null)
   const {data:tasks, setData:setTasks, errorDetected, dataRetrived } = useFetch("http://localhost:8000/tasks")
   
@@ -17,11 +18,12 @@ function App() {
   const handleClickNavBarAddButton = () =>{
     newtaskID+=1;
     newtaskMessage = prompt("Enter the task: ");
+    newDate = prompt("Enter the date of completion: " + today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear());
     console.log(tasks);
 
-    if(newtaskMessage!=null){
+    if(newtaskMessage!=null && newDate!=null){
         // alert("Task ID: "+newtaskID+" : The task is "+newtaskMessage)
-        setTasks(tasks => [...tasks,{taskID: newtaskID, taskMessage: newtaskMessage, dueDate: "01/05/2022"}]);
+        setTasks(tasks => [...tasks,{taskID: newtaskID, taskMessage: newtaskMessage, dueDate: newDate}]);
         /*
           Explanation: I cannot use the push function because the basic sense of
           the useState is to ensure the values it keeps track of are immutable. If ever

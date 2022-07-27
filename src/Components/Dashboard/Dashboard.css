@@ -1,4 +1,8 @@
-
+#TaskList{
+  height:50vh;
+  display: flex;
+  flex-direction: column;
+}
 #Title1{
     margin-top: 10%;
   }
