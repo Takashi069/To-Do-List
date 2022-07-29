@@ -23,8 +23,55 @@
 #Delete{
     background-color: rgb(194, 52, 52);
 }
+#taskNameLabel{
+    grid-area: taskNameLabel;
+}
+#taskName{
+    grid-area: taskName;
+}
+#taskDateLabel{
+    grid-area: "taskDateLabel";
+}
+#taskDate{
+    grid-area: "taskDate";
+}
 .Message{
     align-self: center;
     font-size: medium;
     font-weight: bold;
+}
+.overlay{
+    position: absolute;
+    z-index: 3;
+    background-color: rgba(0,0,0,0.5);
+    height:100vh;
+    width:100%;
+    opacity:0.8;
+
+    display: flex;
+    justify-self: center;
+}
+.popup{
+    opacity: 1;
+    background-color:antiquewhite;
+    width: 35%;
+    margin-left: 30%;
+    padding:5%;
+    max-height: 50vh;
+    border-radius: 5%;
+    align-self: center;
+
+   
+}
+form{
+    display: grid;
+    gap: 0.5rem;
+    grid-template-areas: 
+        "taskNameLabel" "taskName" 
+        "taskDateLabel" "taskDate";
+}
+input{
+    border-style: none;
+    padding: 7%;
+    border-radius: 1%;
 }

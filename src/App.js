@@ -3,7 +3,9 @@ import './App.css';
 import Contact from './Components/Contact/Contact.jsx';
 import NavBar from './Components/NavBar/NavBar.jsx';
 import Dashboard from './Components/Dashboard/Dashboard.jsx';
+import AddTask from './Components/Tasks/AddTasks.jsx';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { useState } from 'react';
 
 function App() {
 
@@ -13,7 +15,7 @@ function App() {
   let today = new Date()
   // const [tasks,setTasks] = useState(null)
   const {data:tasks, setData:setTasks, errorDetected, dataRetrived } = useFetch("http://localhost:8000/tasks")
-  
+  const [popup,setPopup] = useState(true);
   
   const handleClickNavBarAddButton = () =>{
     newtaskID+=1;
@@ -48,10 +50,11 @@ function App() {
     <div className="App">
       <Router>
         <NavBar handleClick={handleClickNavBarAddButton} />
+        <AddTask overlayActive={popup} setOverlayActive={setPopup} />
         <div className="content">
           <Routes>{/* shows the different routes to be taken  */}
                   {/* Route taken when a re-direction is issued/clicked in the webpage */}
-            <Route exact path="/" element={<Dashboard 
+            <Route exact path="/e" element={<Dashboard 
                 tasks={tasks} 
                 setTasks={setTasks} 
                 errorDetected={errorDetected} 
