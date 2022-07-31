@@ -14,6 +14,11 @@ function App() {
   const {data:tasks, setData:setTasks, errorDetected, dataRetrived } = useFetch("http://localhost:8000/tasks")
   const [popup,setPopup] = useState(false);
   
+  const togglePopUp = () =>{
+    setPopup(!popup)
+    console.log(popup)
+  }
+
   const handleClickNavBarAddButton = () =>{
     
     setPopup(true); //activates the popup
@@ -44,7 +49,7 @@ function App() {
     <div className="App">
       <Router>
         <NavBar handleClick={handleClickNavBarAddButton} />
-        {popup && <AddTask closePopup={()=>{}} tasks={tasks} />} {/*This will make sure the popup open only when the button is clicked */}
+        {popup && <AddTask closePopup={togglePopUp} tasks={tasks} />} {/*This will make sure the popup open only when the button is clicked */}
         <div className="content">
           <Routes>{/* shows the different routes to be taken  */}
                   {/* Route taken when a re-direction is issued/clicked in the webpage */}

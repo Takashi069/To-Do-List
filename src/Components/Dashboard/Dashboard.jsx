@@ -9,12 +9,13 @@ const Dashboard = ({tasks,dataRetrived,errorDetected,setTasks}) => {
     
     const handleDelete = (id, category)=>{
       const newTasks = tasks.filter((task) => task.taskID!==id);
-      setTasks(newTasks)
-      if(category === false)
-        console.log("Deleting " + id)
-      else if (category === true)
-        console.log("Completed " + id);
-      console.log(tasks)
+      //deleting the task from the JSON database
+      fetch("http://localhost:8000/tasks/"+id,{
+        method:"DELETE"
+      }).then(()=>{
+        setTasks(newTasks)
+      })
+      
     }
 
     return ( 

@@ -29,14 +29,16 @@
     font-weight: bold;
 }
 .overlay{
-    position: absolute;
+    position: fixed;
+   
     z-index: 3;
     background-color: rgba(0,0,0,0.5);
-    height:100vh;
+    min-height:100%;
     width:100%;
     opacity:0.95;
 
     display: flex;
+    align-items: stretch;
     justify-self: center;
 }
 .popup{
@@ -57,7 +59,8 @@ form{
     grid-template-areas: 
         "taskNameLabel taskName" 
         "taskDateLabel taskDate" 
-        "button button"       
+        "button button" 
+        "cancelButton cancelButton"      
 }
 input{
     border-style: none;
@@ -79,4 +82,7 @@ input{
 }
 #AddTask{
     grid-area:button
+}
+#CancelTask{
+    grid-area:cancelButton
 }

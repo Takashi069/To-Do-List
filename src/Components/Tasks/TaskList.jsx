@@ -12,7 +12,6 @@ function hasTasks(condition,tasks,handleDelete){
     if(condition === "true"){
         return(
             <div id="TaskList">
-            {console.log("In tasklist" + tasks)}
             {tasks.map((task) => (
                 <div id="Task" key={task.id}> 
                     <div id="Task-Details">

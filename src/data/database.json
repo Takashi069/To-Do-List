@@ -1,28 +1,3 @@
 {
-  "tasks": [
-    {
-      "taskID": 4,
-      "taskName": "Laundry",
-      "taskDate": "2022-07-31",
-      "id": 4
-    },
-    {
-      "taskID": 5,
-      "taskName": "Complete React",
-      "taskDate": "2022-07-31",
-      "id": 5
-    },
-    {
-      "taskID": 6,
-      "taskName": "Test",
-      "taskDate": "2022-08-02",
-      "id": 6
-    },
-    {
-      "taskID": 1,
-      "taskName": "Sample Case",
-      "taskDate": "2022-08-01",
-      "id": 7
-    }
-  ]
+  "tasks": []
 }
