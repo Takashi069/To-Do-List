@@ -9,52 +9,46 @@ import { useState } from 'react';
 
 function App() {
 
-  let newtaskMessage;
-  let newtaskID = 3;
-  let newDate
-  let today = new Date()
+  
   // const [tasks,setTasks] = useState(null)
   const {data:tasks, setData:setTasks, errorDetected, dataRetrived } = useFetch("http://localhost:8000/tasks")
-  const [popup,setPopup] = useState(true);
+  const [popup,setPopup] = useState(false);
   
   const handleClickNavBarAddButton = () =>{
-    newtaskID+=1;
-    newtaskMessage = prompt("Enter the task: ");
-    newDate = prompt("Enter the date of completion: " + today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear());
-    console.log(tasks);
+    
+    setPopup(true); //activates the popup
+    
+    // ---------------------Old Code: No Longer Functional----------------------------------------------
+    // if(newtaskMessage!=null && newDate!=null){
+    //     // alert("Task ID: "+newtaskID+" : The task is "+newtaskMessage)
+    //     setTasks(tasks => [...tasks,{taskID: newtaskID, taskMessage: newtaskMessage, dueDate: newDate}]);
+    //     /*
+    //       Explanation: I cannot use the push function because the basic sense of
+    //       the useState is to ensure the values it keeps track of are immutable. If ever
+    //       a need arises to mutate it, I have to use the 'set' function.
+    //       Since the push function mutuates the variable and returns the length of the 
+    //       new Array of dictionaries, it cannot be used.
 
-    if(newtaskMessage!=null && newDate!=null){
-        // alert("Task ID: "+newtaskID+" : The task is "+newtaskMessage)
-        setTasks(tasks => [...tasks,{taskID: newtaskID, taskMessage: newtaskMessage, dueDate: newDate}]);
-        /*
-          Explanation: I cannot use the push function because the basic sense of
-          the useState is to ensure the values it keeps track of are immutable. If ever
-          a need arises to mutate it, I have to use the 'set' function.
-          Since the push function mutuates the variable and returns the length of the 
-          new Array of dictionaries, it cannot be used.
-
-          Instead, I used a Spread Operator "...variablename, entry" to append to the end.
-          Based on the article I read from: 
-          https://javascript.plainenglish.io/how-to-add-to-an-array-in-react-state-3d08ddb2e1dc
+    //       Instead, I used a Spread Operator "...variablename, entry" to append to the end.
+    //       Based on the article I read from: 
+    //       https://javascript.plainenglish.io/how-to-add-to-an-array-in-react-state-3d08ddb2e1dc
           
-          I understood that the recommended way to update the State was to wrapper it based
-          on the following syntax:
-          setVariable(variableName => [...variableName,newValue]) --> This appends to the end
-        */
-    }else
-        newtaskID-=1
-      // console.log(newtaskID + newtaskMessage )
+    //       I understood that the recommended way to update the State was to wrapper it based
+    //       on the following syntax:
+    //       setVariable(variableName => [...variableName,newValue]) --> This appends to the end
+    //     */
+    // } -------------------Old Code: No Longer Functional----------------------------------------------
   }
 
   return (
     <div className="App">
       <Router>
         <NavBar handleClick={handleClickNavBarAddButton} />
-        <AddTask overlayActive={popup} setOverlayActive={setPopup} />
+        {popup && <AddTask closePopup={()=>{}} tasks={tasks} />} {/*This will make sure the popup open only when the button is clicked */}
         <div className="content">
           <Routes>{/* shows the different routes to be taken  */}
                   {/* Route taken when a re-direction is issued/clicked in the webpage */}
-            <Route exact path="/e" element={<Dashboard 
+            <Route exact path="/" element={<Dashboard 
                 tasks={tasks} 
                 setTasks={setTasks} 
                 errorDetected={errorDetected} 

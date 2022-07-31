@@ -3,8 +3,8 @@
 }
 
 #TaskList{
-    height:100%;
     width:100%;
+    position: relative;
 }
 #Task{
     position:relative;
@@ -23,18 +23,6 @@
 #Delete{
     background-color: rgb(194, 52, 52);
 }
-#taskNameLabel{
-    grid-area: taskNameLabel;
-}
-#taskName{
-    grid-area: taskName;
-}
-#taskDateLabel{
-    grid-area: "taskDateLabel";
-}
-#taskDate{
-    grid-area: "taskDate";
-}
 .Message{
     align-self: center;
     font-size: medium;
@@ -46,7 +34,7 @@
     background-color: rgba(0,0,0,0.5);
     height:100vh;
     width:100%;
-    opacity:0.8;
+    opacity:0.95;
 
     display: flex;
     justify-self: center;
@@ -67,11 +55,28 @@ form{
     display: grid;
     gap: 0.5rem;
     grid-template-areas: 
-        "taskNameLabel" "taskName" 
-        "taskDateLabel" "taskDate";
+        "taskNameLabel taskName" 
+        "taskDateLabel taskDate" 
+        "button button"       
 }
 input{
     border-style: none;
-    padding: 7%;
+    padding: 4%;
     border-radius: 1%;
+}
+
+#taskNameLabel{
+    grid-area: taskNameLabel;
+}
+#taskName{
+    grid-area: taskName;
+}
+#taskDateLabel{
+    grid-area: taskDateLabel;
+}
+#taskDate{
+    grid-area: taskDate;
+}
+#AddTask{
+    grid-area:button
 }

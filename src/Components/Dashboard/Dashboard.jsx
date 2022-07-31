@@ -3,6 +3,8 @@ import './Dashboard.css'
 const Dashboard = ({tasks,dataRetrived,errorDetected,setTasks}) => {
 
    let today = new Date();
+   const month = today.getMonth()+1
+   const formattedMonth = month<10 ? '0'+month : month
     // const [tasks,setTasks] = useState(null)
     
     const handleDelete = (id, category)=>{
@@ -24,7 +26,7 @@ const Dashboard = ({tasks,dataRetrived,errorDetected,setTasks}) => {
             {/*Conditional Templating shown below */}
             {errorDetected && <div id="Error">Data Not Available</div>}
             {!dataRetrived && !errorDetected && <div id="Loading">Loading</div>}
-            {tasks && <TaskList tasks={tasks.filter((task) => task.dueDate === today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear())} handleDelete = {handleDelete}/>}
+            {tasks && <TaskList tasks={tasks.filter((task) => task.taskDate === today.getFullYear() + "-" + formattedMonth + "-" + today.getDate())} handleDelete = {handleDelete}/>}
             <h1>All Tasks</h1>
             {errorDetected && <div id="Error">Data Not Available</div>}
             {!dataRetrived && !errorDetected && <div id="Loading">Loading</div>}

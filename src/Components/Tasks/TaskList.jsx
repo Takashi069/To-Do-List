@@ -14,13 +14,13 @@ function hasTasks(condition,tasks,handleDelete){
             <div id="TaskList">
             {console.log("In tasklist" + tasks)}
             {tasks.map((task) => (
-                <div id="Task" key={task.taskID}> 
+                <div id="Task" key={task.id}> 
                     <div id="Task-Details">
-                        <h2>{task.taskMessage}</h2>
-                        <p>Due on: {task.dueDate}</p>
+                        <h2>{task.taskName}</h2>
+                        <p>Due on: {task.taskDate}</p>
                     </div>
-                    <button id="Complete" onClick={() => handleDelete(task.taskID, true)}>Completed</button>
-                    <button id="Delete" onClick={() => handleDelete(task.taskID, false)}>Delete</button>
+                    <button id="Complete" onClick={() => handleDelete(task.id, true)}>Completed</button>
+                    <button id="Delete" onClick={() => handleDelete(task.id, false)}>Delete</button>
                 </div> 
             ))}
             </div>
