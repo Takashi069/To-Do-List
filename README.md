@@ -15,3 +15,10 @@ A basic beginner to-do-list implemented with React
 <br>
 
 <small>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).</small>
+
+# Video Demo of the Project
+
+https://user-images.githubusercontent.com/73834506/182040077-2e399bd5-e7ec-4e71-afdf-8f48d0cc591d.mp4
+
+> **Note**
+> There is a Calender Pop-Up but for some reason it does not appear in the video.
