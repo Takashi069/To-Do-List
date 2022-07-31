@@ -18,7 +18,9 @@ A basic beginner to-do-list implemented with React
 
 # Video Demo of the Project
 
-https://user-images.githubusercontent.com/73834506/182040077-2e399bd5-e7ec-4e71-afdf-8f48d0cc591d.mp4
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=s-jVkuFvyRs
+" target="_blank"><img src="http://img.youtube.com/vi/s-jVkuFvyRs/0.jpg" 
+alt="To-Do List" width="300" height="240" border="10" /></a>
 
 > **Note**
 > There is a Calender Pop-Up but for some reason it does not appear in the video.
